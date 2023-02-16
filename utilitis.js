@@ -6,21 +6,31 @@ const totalBlance = document.getElementById('total-blance');
 
 
 function expenseUpdate(){
-        // console.log('expnse clicked');
         const total = parseFloat(food.value) + parseFloat(rent.value) + parseFloat(cloth.value);
-        const totalExpnse = document.getElementById('total-expnse');
-        totalExpnse.innerText = total;
-        // console.log(total);
-    
-        totalBlance.innerText = parseFloat(balance.value) - total;
-
-        console.log(totalBlance.innerText);
+        const totalDownBlance = parseFloat(balance.value) - total;
+        if (isNaN(parseFloat(balance.value)) || isNaN(parseFloat(food.value)) || isNaN(parseFloat(rent.value)) || isNaN(parseFloat(cloth.value))) {
+            alert('Give valid number');
+            return;
+        }
+        setValue('total-expnse', total);
+        setValue('total-blance', totalDownBlance);
 }
 function savingsUpdate(){
     const savings = document.getElementById('savings');
     const savingCalculate = parseFloat(savings.value) / 100;
-    const totalSavings = document.getElementById('total-savings');
-    const finalSavings = totalSavings.innerText = parseFloat(totalBlance.innerText) * savingCalculate;
-    document.getElementById('remaining-Balance').innerText = parseFloat(totalBlance.innerText) - finalSavings;
-    // console.log(parseFloat(totalBlance.innerText), savingCalculate);
+    const finalSavings = parseFloat(totalBlance.innerText) * savingCalculate;
+    if (isNaN(parseFloat(savings.value))) {
+        alert('Give valid number');
+        return;
+    }
+    setValue('total-savings', finalSavings)
+    const remainingBlance = parseFloat(totalBlance.innerText) - finalSavings;
+    setValue('remaining-Balance', remainingBlance);
 }
+
+function setValue(setId, setValue ){
+    document.getElementById(setId).innerText = setValue.toFixed(2);
+}
+// function validation(){
+//     return isTrue? document.getElementById(setId).innerText: document.getElementById(setId).value;
+// }
