@@ -23,6 +23,9 @@ function savingsUpdate(){
         alert('Give valid number');
         return;
     }
+    else if(savings.value > totalBlance.innerText){
+        alert('Not enuagh money')
+    }
     setValue('total-savings', finalSavings)
     const remainingBlance = parseFloat(totalBlance.innerText) - finalSavings;
     setValue('remaining-Balance', remainingBlance);
