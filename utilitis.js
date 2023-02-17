@@ -12,19 +12,25 @@ function expenseUpdate(){
             alert('Give valid number');
             return;
         }
+        else if (balance.value < 0 || food.value < 0 || rent.value < 0 || cloth.value < 0 ){
+            alert('Give Possitive number');
+            return;
+        }
         setValue('total-expnse', total);
         setValue('total-blance', totalDownBlance);
 }
 function savingsUpdate(){
     const savings = document.getElementById('savings');
     const savingCalculate = parseFloat(savings.value) / 100;
-    const finalSavings = parseFloat(totalBlance.innerText) * savingCalculate;
+    const finalSavings = parseFloat(balance.value) * savingCalculate;
+    const totalSavings = document.getElementById('total-savings')
     if (isNaN(parseFloat(savings.value))) {
         alert('Give valid number');
         return;
     }
-    else if(savings.value > totalBlance.innerText){
+    else if(finalSavings > totalBlance.innerText){
         alert('Not enuagh money')
+        return;
     }
     setValue('total-savings', finalSavings)
     const remainingBlance = parseFloat(totalBlance.innerText) - finalSavings;
